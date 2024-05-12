@@ -10,14 +10,16 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import auth from "../../firebase/firebase.config";
+// import auth from "../../firebase/firebase.config";
+import auth from "../firebase/Firebase.config";
 
 const googProvider = new GoogleAuthProvider();
 const gitProvider = new GithubAuthProvider();
 const twitProvider = new TwitterAuthProvider();
 
 export const ProjectContext = createContext(null);
-const BlogProvider = ({ children }) => {
+
+const ReactProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);
 
@@ -85,7 +87,8 @@ const BlogProvider = ({ children }) => {
   );
 };
 
-export default BlogProvider;
-BlogProvider.propTypes = {
+export default ReactProvider;
+
+ReactProvider.propTypes = {
   children: PropTypes.node,
 };
