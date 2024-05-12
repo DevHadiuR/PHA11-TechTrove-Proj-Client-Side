@@ -40,7 +40,7 @@ const Banner = () => {
           >
             <div className="hero-overlay bg-opacity-30"></div>
             <div className="hero-content text-center text-neutral-content">
-              <div className="max-w-3xl">
+              <div className="max-w-3xl mt-28 md:mt-0">
                 <h1 className="mb-5 text-white text-4xl font-dm md:text-6xl font-bold">
                   Exploring the Frontier of Technology
                 </h1>
@@ -62,7 +62,7 @@ const Banner = () => {
           >
             <div className="hero-overlay bg-opacity-40"></div>
             <div className="hero-content text-center text-neutral-content">
-              <div className="max-w-3xl">
+              <div className="max-w-3xl mt-28 md:mt-0">
                 <h1 className="mb-5 text-white text-4xl font-dm md:text-6xl font-bold">
                   Dive Deep into Tech Analysis
                 </h1>
@@ -85,7 +85,7 @@ const Banner = () => {
           >
             <div className="hero-overlay bg-opacity-40"></div>
             <div className="hero-content text-center text-neutral-content">
-              <div className="max-w-3xl">
+              <div className="max-w-3xl mt-28 md:mt-0">
                 <h1 className="mb-5 text-white text-4xl font-dm md:text-6xl font-bold">
                   Tomorrow&apos;s Tech, Today
                 </h1>

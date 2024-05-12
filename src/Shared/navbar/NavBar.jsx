@@ -1,28 +1,33 @@
 "use client";
-
+import "./Navbar.css";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <div className="absolut">
-      <Navbar fluid rounded>
-        <Navbar.Brand href="https://flowbite-react.com">
-          <img
-            src="/favicon.svg"
-            className="mr-3 h-6 sm:h-9"
-            alt="Flowbite React Logo"
-          />
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-            Flowbite React
-          </span>
+    <>
+      <Navbar fluid rounded className="bg-transparent text-white">
+        <Navbar.Brand>
+          <Link to="/">
+            <img
+              src="/titleLogo.jpg"
+              className="mr-3 w-12  md:w-14 "
+              alt="Flowbite React Logo"
+            />
+          </Link>
         </Navbar.Brand>
-        <div className="flex md:order-2">
+        <div className="flex items-center md:order-2 ">
+          <span>
+            <button className="border-animate">Login</button> {""}/{" "}
+            <button className="border-animate">Register</button>
+          </span>
           <Dropdown
             arrowIcon={false}
             inline
             label={
               <Avatar
                 alt="User settings"
+                className=" relative avatar-container transition-all rounded-full bg-white "
                 img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
                 rounded
               />
@@ -34,25 +39,81 @@ const NavBar = () => {
                 name@flowbite.com
               </span>
             </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
-            <Dropdown.Item>Earnings</Dropdown.Item>
+
             <Dropdown.Divider />
             <Dropdown.Item>Sign out</Dropdown.Item>
           </Dropdown>
-          <Navbar.Toggle />
+          <Navbar.Toggle className="text-white hover:bg-transparent ml-2" />
         </div>
-        <Navbar.Collapse>
-          <Navbar.Link href="#" active>
+        <Navbar.Collapse className="bg-[#2A7886]  rounded-2xl  p-3 md:bg-transparent md:p-0">
+          <NavLink
+            to="/"
+            className=" transition-all  px-3 py-2  hover:bg-transparent border-animate "
+            style={({ isActive }) => {
+              return {
+                borderBottom: isActive ? "2px solid white" : "",
+                backgroundColor: isActive ? "transparent" : "transparent",
+                color: isActive ? "white" : "white",
+              };
+            }}
+          >
             Home
-          </Navbar.Link>
-          <Navbar.Link href="#">About</Navbar.Link>
-          <Navbar.Link href="#">Services</Navbar.Link>
-          <Navbar.Link href="#">Pricing</Navbar.Link>
-          <Navbar.Link href="#">Contact</Navbar.Link>
+          </NavLink>
+          <NavLink
+            to="/addBlog"
+            className=" transition-all border-animate p-2 hover:bg-transparent "
+            style={({ isActive }) => {
+              return {
+                borderBottom: isActive ? "2px solid white" : "",
+                backgroundColor: isActive ? "transparent" : "transparent",
+                color: isActive ? "white" : "white",
+              };
+            }}
+          >
+            Add Blog
+          </NavLink>
+          <NavLink
+            to="/allBlogs"
+            className=" transition-all border-animate p-2 hover:bg-transparent "
+            style={({ isActive }) => {
+              return {
+                borderBottom: isActive ? "2px solid white" : "",
+                backgroundColor: isActive ? "transparent" : "transparent",
+                color: isActive ? "white" : "white",
+              };
+            }}
+          >
+            All Blogs
+          </NavLink>
+          <NavLink
+            to="/featuredBlogs"
+            className=" transition-all border-animate p-2 hover:bg-transparent "
+            style={({ isActive }) => {
+              return {
+                borderBottom: isActive ? "2px solid white" : "",
+                backgroundColor: isActive ? "transparent" : "transparent",
+                color: isActive ? "white" : "white",
+              };
+            }}
+          >
+            Featured Blogs
+          </NavLink>
+          <NavLink
+            to="/wishlist"
+            className=" transition-all border-animate p-2 hover:bg-transparent "
+            style={({ isActive }) => {
+              return {
+                borderBottom: isActive ? "2px solid white" : "",
+                backgroundColor: isActive ? "transparent" : "transparent",
+                color: isActive ? "white" : "white",
+              };
+            }}
+          >
+            Wishlist
+          </NavLink>
         </Navbar.Collapse>
       </Navbar>
-    </div>
+    </>
   );
 };
 
