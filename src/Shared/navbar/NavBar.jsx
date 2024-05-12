@@ -18,8 +18,15 @@ const NavBar = () => {
         </Navbar.Brand>
         <div className="flex items-center md:order-2 ">
           <span>
-            <button className="border-animate">Login</button> {""}/{" "}
-            <button className="border-animate">Register</button>
+            <Link to="/login">
+              <button href="/login" className="border-animate">
+                Login
+              </button>
+            </Link>{" "}
+            {""}/{" "}
+            <Link to="/register">
+              <button className="border-animate">Register</button>
+            </Link>
           </span>
           <Dropdown
             arrowIcon={false}
