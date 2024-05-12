@@ -2,7 +2,6 @@ import ban1 from "../../assets/banner/b1.jpg";
 import ban2 from "../../assets/banner/b2.jpg";
 import ban3 from "../../assets/banner/b3.jpg";
 
-import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -18,7 +17,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 const Banner = () => {
   return (
-    <div className="h-screen">
+    <div className="h-screen relative">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -39,10 +38,10 @@ const Banner = () => {
             className="hero min-h-screen"
             style={{ backgroundImage: `url(${ban2})` }}
           >
-            <div className="hero-overlay bg-opacity-25"></div>
+            <div className="hero-overlay bg-opacity-30"></div>
             <div className="hero-content text-center text-neutral-content">
               <div className="max-w-3xl">
-                <h1 className="mb-5 text-4xl font-dm md:text-6xl font-bold">
+                <h1 className="mb-5 text-white text-4xl font-dm md:text-6xl font-bold">
                   Exploring the Frontier of Technology
                 </h1>
                 <p className="mb-5 font-serif">
@@ -64,7 +63,7 @@ const Banner = () => {
             <div className="hero-overlay bg-opacity-40"></div>
             <div className="hero-content text-center text-neutral-content">
               <div className="max-w-3xl">
-                <h1 className="mb-5 text-4xl font-dm md:text-6xl font-bold">
+                <h1 className="mb-5 text-white text-4xl font-dm md:text-6xl font-bold">
                   Dive Deep into Tech Analysis
                 </h1>
                 <p className="mb-5 font-serif">
@@ -87,7 +86,7 @@ const Banner = () => {
             <div className="hero-overlay bg-opacity-40"></div>
             <div className="hero-content text-center text-neutral-content">
               <div className="max-w-3xl">
-                <h1 className="mb-5 text-4xl font-dm md:text-6xl font-bold">
+                <h1 className="mb-5 text-white text-4xl font-dm md:text-6xl font-bold">
                   Tomorrow&apos;s Tech, Today
                 </h1>
                 <p className="mb-5 font-serif">
