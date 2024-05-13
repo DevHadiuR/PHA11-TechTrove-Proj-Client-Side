@@ -131,15 +131,13 @@ const Login = () => {
             <div className="hero-content flex flex-col lg:flex-row-reverse gap-10">
               <div className="text-center w-full flex-1 ">
                 <h1 className="text-4xl md:text-6xl font-bold text-white opacity-95 font-dm">
-                  Log In to Your Account
+                  Welcome Back!
                 </h1>
                 <p className="py-6 font-serif text-lg text-white opacity-90">
-                  &quot;Welcome back! Please sign in to access your account.
-                  Enter your email address and password to proceed. If you
-                  don&apos;t have an account yet, you can easily create one by
-                  clicking on the &apos;Sign Up&apos; link. Stay connected with
-                  us and explore the latest updates and features of our
-                  platform. &quot;
+                &quot;Sign in to access your account and explore our latest tech
+                  blogs. Stay updated with cutting-edge trends, insightful
+                  articles, and expert opinions from our community of tech
+                  enthusiasts.&quot;
                 </p>
               </div>
               <div className="card flex-1 w-full ">
