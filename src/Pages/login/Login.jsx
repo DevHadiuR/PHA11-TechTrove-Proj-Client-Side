@@ -12,6 +12,8 @@ import { Helmet } from "react-helmet-async";
 import useAuth from "../../hooks/useAuth";
 import NavBar from "../../Shared/navbar/NavBar";
 
+import bg3 from "../../assets/authenticationBG/log3.jpg";
+
 const Login = () => {
   //   const location = useLocation();
   //   const navigate = useNavigate();
@@ -110,28 +112,28 @@ const Login = () => {
   };
 
   return (
-    <section>
-      <div className="bg-[#2A7886]">
+    <section className="relative z-0">
+      <div className="absolute w-full top-0 z-50    bg-transparent ">
         <NavBar></NavBar>
       </div>
       <div
-        className="hero min-h-screen"
+        className="hero min-h-screen relative z-0 "
         style={{
-          backgroundImage: "url(/login.jpg)",
+          backgroundImage: `url(${bg3})`,
         }}
       >
         <Helmet>
           <title>Login Page | TechTrove</title>
         </Helmet>
-        <div className="hero-overlay bg-opacity-40"></div>
-        <div className="hero-content">
+        <div className="hero-overlay bg-opacity-50"></div>
+        <div className="hero-content mt-36">
           <div className="hero min-h-screen ">
             <div className="hero-content flex flex-col lg:flex-row-reverse gap-10">
               <div className="text-center w-full flex-1 ">
-                <h1 className="text-4xl md:text-6xl font-bold text-white opacity-90 font-dm">
+                <h1 className="text-4xl md:text-6xl font-bold text-white opacity-95 font-dm">
                   Log In to Your Account
                 </h1>
-                <p className="py-6 font-serif text-lg text-white opacity-85">
+                <p className="py-6 font-serif text-lg text-white opacity-90">
                   &quot;Welcome back! Please sign in to access your account.
                   Enter your email address and password to proceed. If you
                   don&apos;t have an account yet, you can easily create one by
@@ -142,7 +144,7 @@ const Login = () => {
               </div>
               <div className="card flex-1 w-full ">
                 <div className=" rounded-2xl">
-                  <h1 className="text-center mt-2  w-[70%]  mx-auto  text-5xl font-semibold font-dm text-white opacity-90]">
+                  <h1 className="text-center mt-2  w-[70%]  mx-auto  text-5xl font-semibold font-dm text-white opacity-95]">
                     LOGIN NOW!
                   </h1>
                   <form
@@ -186,9 +188,9 @@ const Login = () => {
                         className="absolute bottom-3 right-5 text-2xl cursor-pointer"
                       >
                         {showPass ? (
-                          <IoMdEyeOff className="text-white" />
-                        ) : (
                           <IoEye className="text-white" />
+                        ) : (
+                          <IoMdEyeOff className="text-white" />
                         )}
                       </span>
                     </div>
@@ -200,7 +202,7 @@ const Login = () => {
                     <div className="form-control mt-6">
                       <button
                         type="submit"
-                        className="btn bg-transparent text-xl hover:bg-[#628E90] text-white transition-all"
+                        className="btn bg-transparent text-xl hover:bg-[#512B58] text-white transition-all"
                       >
                         LOGIN
                       </button>
