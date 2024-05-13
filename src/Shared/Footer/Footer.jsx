@@ -42,7 +42,7 @@ const Footer = () => {
           <p>- One to one service</p>
         </nav>
       </div>
-      <div className="footer items-center px-4 py-10 bg-[#2A7886] text-neutral-content ">
+      <div className="footer items-center px-4 py-10 bg-[#512B58] text-neutral-content border-t">
         <aside className="items-center grid-flow-col">
           <p className="text-lg">Copyright © 2024 - All right reserved</p>
         </aside>
