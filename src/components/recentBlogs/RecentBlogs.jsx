@@ -37,7 +37,7 @@ const RecentBlogs = () => {
           <div key={blog._id} className="mt-8">
             <div className="container grid grid-cols-12 mx-auto bg-[#F1F3F4] rounded-xl">
               <div
-                className="bg-no-repeat  bg-cover  col-span-full md:col-span-5 row-span-full"
+                className="bg-no-repeat bg-gray-400 md:bg-transparent  bg-cover  col-span-full md:col-span-5 row-span-full"
                 style={{
                   backgroundImage: `url(${blog.img})`,
                   backgroundPosition: "center center",
@@ -69,15 +69,21 @@ const RecentBlogs = () => {
                     {blog.category}
                   </span>
                 </div>
-                <h1 className="text-3xl font-semibold ">{blog.title}</h1>
-                <p className="flex-1 pt-2">{blog.shortDescription}</p>
+                <h1 className="text-3xl text-white opacity-90 md:text-black md:opacity-100 font-semibold ">
+                  {blog.title}
+                </h1>
+                <p className="flex-1 pt-2 text-white opacity-90 md:text-black md:opacity-100">
+                  {blog.shortDescription}
+                </p>
                 <a
                   rel="noopener noreferrer"
                   href="#"
-                  className="inline-flex items-center pt-2 pb-6 space-x-2 text-sm text-violet-400"
+                  className="inline-flex items-center pt-2 pb-6 space-x-2 text-sm text-violet-400 text-white  md:text-black "
                 >
                   <Link to="/blogDetails">
-                    <span>Read more</span>
+                    <span className="text-white opacity-90 md:text-black md:opacity-100">
+                      Read more
+                    </span>
                   </Link>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

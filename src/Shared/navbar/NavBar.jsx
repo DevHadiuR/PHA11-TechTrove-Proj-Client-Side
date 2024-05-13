@@ -64,7 +64,6 @@ const NavBar = () => {
               inline
               label={
                 <Avatar
-               
                   alt="User settings"
                   className="avatar w-14 md:w-16 relative avatar-container transition-all rounded-full bg-white border"
                   img={photoURL}
