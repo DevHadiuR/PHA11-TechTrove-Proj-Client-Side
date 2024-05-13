@@ -41,7 +41,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    // reset,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -82,7 +82,7 @@ const Register = () => {
           photoURL: url,
         });
 
-        // reset();
+        reset();
       })
       .catch((error) => {
         const err = error.message
