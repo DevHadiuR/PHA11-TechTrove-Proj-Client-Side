@@ -2,8 +2,36 @@
 import "./Navbar.css";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { HiLogout } from "react-icons/hi";
+import Swal from "sweetalert2";
+import "sweetalert2/src/sweetalert2.scss";
 
 const NavBar = () => {
+  const { user, logoutUser } = useAuth();
+  const { email, photoURL, displayName } = user || {};
+
+  const logout = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You Wanna Log Out ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "SURE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logoutUser();
+        Swal.fire({
+          title: "Hmmmmmmmm!!",
+          text: "Sir You Have Successfully Log Out!",
+          icon: "success",
+        });
+      }
+    });
+  };
+
   return (
     <>
       <Navbar fluid rounded className="bg-transparent text-white">
@@ -17,39 +45,45 @@ const NavBar = () => {
           </Link>
         </Navbar.Brand>
         <div className="flex items-center md:order-2 ">
-          <span>
-            <Link to="/login">
-              <button href="/login" className="border-animate">
-                Login
-              </button>
-            </Link>{" "}
-            {""}/{" "}
-            <Link to="/register">
-              <button className="border-animate">Register</button>
-            </Link>
-          </span>
-          <Dropdown
-            arrowIcon={false}
-            inline
-            label={
-              <Avatar
-                alt="User settings"
-                className=" relative avatar-container transition-all rounded-full bg-white "
-                img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                rounded
-              />
-            }
-          >
-            <Dropdown.Header>
-              <span className="block text-sm">Bonnie Green</span>
-              <span className="block truncate text-sm font-medium">
-                name@flowbite.com
-              </span>
-            </Dropdown.Header>
+          {!user && (
+            <span>
+              <Link to="/login">
+                <button href="/login" className="border-animate">
+                  Log In
+                </button>
+              </Link>{" "}
+              {""}/{" "}
+              <Link to="/register">
+                <button className="border-animate">Register</button>
+              </Link>
+            </span>
+          )}
+          {user && (
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={
+                <Avatar
+                  alt="User settings"
+                  className=" relative avatar-container transition-all rounded-full bg-white border"
+                  img={photoURL}
+                  rounded
+                />
+              }
+            >
+              <Dropdown.Header>
+                <span className="block text-sm">{displayName}</span>
+                <span className="block truncate text-sm font-medium">
+                  {email}
+                </span>
+              </Dropdown.Header>
 
-            <Dropdown.Divider />
-            <Dropdown.Item>Sign out</Dropdown.Item>
-          </Dropdown>
+              <Dropdown.Divider />
+              <Dropdown.Item onClick={logout}>
+                <HiLogout className="text-2xl mr-3" /> Sign out
+              </Dropdown.Item>
+            </Dropdown>
+          )}
           <Navbar.Toggle className="text-white hover:bg-transparent ml-2" />
         </div>
         <Navbar.Collapse className="bg-[#2A7886]  rounded-2xl  p-3 md:bg-transparent md:p-0">
