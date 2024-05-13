@@ -20,7 +20,7 @@ const RecentBlogs = () => {
         <div className="mt-8">
           <div className="container grid grid-cols-12 mx-auto bg-[#F1F3F4] rounded-xl">
             <div
-              className="bg-no-repeat  bg-cover  col-span-full md:col-span-4 row-span-full"
+              className="bg-no-repeat  bg-cover  col-span-full md:col-span-5 row-span-full"
               style={{
                 backgroundImage:
                   "url('https://source.unsplash.com/random/640x480')",
@@ -29,7 +29,7 @@ const RecentBlogs = () => {
                 backgroundSize: "cover",
               }}
             ></div>
-            <div className="flex flex-col p-6 col-span-full row-span-full md:col-span-8 lg:p-10 ml-0 md:ml-8">
+            <div className="flex flex-col p-6 col-span-full row-span-full md:col-span-7 lg:p-10 ml-0 md:ml-8">
               <div className="flex justify-start">
                 <span className="px-3 py-1 rounded-full text-blue-500 bg-blue-100/90 ">
                   Labelallll
