@@ -64,8 +64,9 @@ const NavBar = () => {
               inline
               label={
                 <Avatar
+               
                   alt="User settings"
-                  className=" relative avatar-container transition-all rounded-full bg-white border"
+                  className="avatar w-14 md:w-16 relative avatar-container transition-all rounded-full bg-white border"
                   img={photoURL}
                   rounded
                 />
@@ -84,7 +85,7 @@ const NavBar = () => {
               </Dropdown.Item>
             </Dropdown>
           )}
-          <Navbar.Toggle className="text-white hover:bg-transparent ml-2" />
+          <Navbar.Toggle className="text-white border-2 hover:bg-transparent ml-4" />
         </div>
         <Navbar.Collapse className="bg-[#2A7886]  rounded-2xl  p-3 md:bg-transparent md:p-0">
           <NavLink
