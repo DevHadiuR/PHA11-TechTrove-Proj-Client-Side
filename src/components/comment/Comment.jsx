@@ -1,7 +1,51 @@
 import { Button } from "flowbite-react";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import useAuth from "../../hooks/useAuth";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
-const Comment = () => {
+const Comment = ({ blogId, bloggerEmail }) => {
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const { displayName, photoURL, email } = user || {};
+
+  //   using tanstack for post data
+  const { mutate } = useMutation({
+    mutationFn: (postData) => {
+      axiosSecure
+        .post("/allComments", postData)
+        .then((value) => {
+          const data = value.data;
+          console.log(data);
+          return data;
+        })
+        .catch((err) => console.log(err));
+    },
+    onSuccess: () => {
+      toast.success("Successfully Commented");
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // if (bloggerEmail === email) {
+    //   toast.error("Can not comment on own blog!");
+
+    //   return;
+    // }
+
+    const userComment = e.target.comment.value;
+    const postData = {
+      userComment,
+      displayName,
+      photoURL,
+      blogId,
+    };
+    mutate(postData);
+    e.target.reset();
+  };
+
   return (
     <div className="mt-40 container mx-auto">
       {/* comment section */}
@@ -15,28 +59,39 @@ const Comment = () => {
 
           <div className="avatar mb-4">
             <div className="w-14 rounded-full">
-              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              <img src={photoURL} referrerPolicy="no-referrer" />
             </div>
           </div>
 
-          <form className="mb-6">
+          <form onSubmit={handleSubmit} className="mb-6">
             <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-300 dark:bg-gray-800 dark:border-gray-700">
-              <label htmlFor="comment" className="sr-only">
-                Your comment
-              </label>
-              <textarea
-                id="comment"
-                rows="6"
-                className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                placeholder="Write a comment..."
-                required
-              ></textarea>
+              {email === bloggerEmail && (
+                <input
+                  type="text"
+                  placeholder="Can not comment on own blog"
+                  className="input input-bordered w-full max-w-sm text-xl "
+                  disabled
+                />
+              )}
+
+              {email !== bloggerEmail && (
+                <textarea
+                  id="comment"
+                  rows="6"
+                  name="comment"
+                  className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                  placeholder="Write a comment..."
+                  required
+                ></textarea>
+              )}
             </div>
-            <div className="flex justify-end my-6">
-              <Button gradientDuoTone="purpleToBlue" pill>
-                Comment
-              </Button>
-            </div>
+            {bloggerEmail !== email && (
+              <div className="flex justify-end my-6">
+                <Button type="submit" gradientDuoTone="purpleToBlue" pill>
+                  Comment
+                </Button>
+              </div>
+            )}
           </form>
 
           <article className="p-6 mb-3 text-base bg-white border-t border-gray-300 dark:border-gray-700 dark:bg-gray-900">
@@ -44,6 +99,7 @@ const Comment = () => {
               <div className="flex items-center">
                 <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
                   <img
+                    referrerPolicy="no-referrer"
                     className="mr-2 w-10 h-10 rounded-full"
                     src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
                     alt="Bonnie Green"

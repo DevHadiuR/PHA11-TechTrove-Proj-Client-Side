@@ -77,6 +77,7 @@ const ReactProvider = ({ children }) => {
     gitHubProvider,
     twitterProvider,
     loader,
+    setUser,
     // craftItems,
   };
 

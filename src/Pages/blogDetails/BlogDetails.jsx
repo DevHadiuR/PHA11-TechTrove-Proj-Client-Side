@@ -21,7 +21,7 @@ const BlogDetails = () => {
     return data;
   };
 
-  const { img, title, shortDescription, longDescription, category } = blog;
+  const { img, title, shortDescription, longDescription, category ,bloggerEmail} = blog;
 
   return (
     <section className="relative z-0">
@@ -73,7 +73,7 @@ const BlogDetails = () => {
       </div>
 
       <div>
-        <Comment></Comment>
+        <Comment bloggerEmail={bloggerEmail} blogId={id}></Comment>
       </div>
     </section>
   );

@@ -18,7 +18,7 @@ import bg2 from "../../assets/authenticationBG/log2.jpg";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
-  const { createUser } = useAuth();
+  const { createUser, setUser } = useAuth();
 
   const handleError = (er) => {
     toast.error(er, {
@@ -80,6 +80,12 @@ const Register = () => {
         updateProfile(user, {
           displayName: name,
           photoURL: url,
+        });
+
+        setUser({
+          ...user,
+          photoURL: url,
+          displayName: name,
         });
 
         reset();
