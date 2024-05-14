@@ -9,9 +9,9 @@ const BlogDetails = () => {
 
   const axiosSecure = useAxiosSecure();
 
-  const { data } = useQuery({
+  const { data: blog = [] } = useQuery({
     queryFn: () => getData(),
-    queryKey: ["perBlogDetails"],
+    queryKey: ["perBlogDetails", id],
   });
 
   const getData = async () => {
@@ -19,6 +19,8 @@ const BlogDetails = () => {
 
     return data;
   };
+
+  const { img, title, shortDescription, longDescription, category } = blog;
 
   return (
     <section className="relative z-0">
@@ -29,23 +31,44 @@ const BlogDetails = () => {
       <div
         className="hero min-h-[570px]"
         style={{
-          backgroundImage: `url(${data.img})`,
+          backgroundImage: `url(${img})`,
         }}
       >
         <div className="hero-overlay bg-opacity-40"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-2xl">
-            <h1 className="mb-5 text-3xl md:text-6xl font-bold">
-              {data.title}
+            <h1 className="mb-5 text-3xl md:text-6xl font-bold text-white opacity-85">
+              {title}
             </h1>
             <p className="mb-5 text-xl md:text-2xl font-medium">
-              {data.shortDescription}
+              {shortDescription}
             </p>
           </div>
         </div>
       </div>
-      <div className="mt-5 w-[97%] mx-auto">
-        <h1 className="text-xl font-medium">{data.longDescription}</h1>
+      <div className="mt-8 mb-8 md:ml-5">
+        <span
+          className={`px-8 md:px-10 text-md md:text-lg font-medium py-2  rounded-full
+                     ${
+                       blog.category === "Latest Trends" &&
+                       "text-blue-600 bg-blue-100/90"
+                     } ${
+            blog.category === "AI and Machine Learning" &&
+            "text-green-600 bg-green-100/90"
+          } ${
+            blog.category === "Cybersecurity" && "text-red-600 bg-red-100/90"
+          } ${
+            blog.category === "Gaming" && "text-yellow-600 bg-yellow-100/90"
+          } ${
+            blog.category === "Software and Apps" &&
+            "text-purple-600 bg-purple-100/90"
+          } `}
+        >
+          {category}
+        </span>
+      </div>
+      <div className="mt-5 w-[97%] mx-auto ">
+        <h1 className="text-xl font-medium">{longDescription}</h1>
       </div>
     </section>
   );
