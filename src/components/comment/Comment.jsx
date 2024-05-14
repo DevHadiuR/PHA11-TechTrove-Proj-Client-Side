@@ -11,7 +11,7 @@ const Comment = ({ blogId, bloggerEmail }) => {
   const { displayName, photoURL, email } = user || {};
 
   //   using tanstack for post data
-  const { mutate } = useMutation({
+  const { mutate, refetch } = useMutation({
     mutationFn: (postData) => {
       axiosSecure
         .post("/allComments", postData)
@@ -24,16 +24,12 @@ const Comment = ({ blogId, bloggerEmail }) => {
     },
     onSuccess: () => {
       toast.success("Successfully Commented");
+      refetch();
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (bloggerEmail === email) {
-    //   toast.error("Can not comment on own blog!");
-
-    //   return;
-    // }
 
     const userComment = e.target.comment.value;
     const postData = {
@@ -118,10 +114,10 @@ const Comment = ({ blogId, bloggerEmail }) => {
                     <img
                       referrerPolicy="no-referrer"
                       className="mr-2 w-10 h-10 rounded-full"
-                      src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                      src={comment.photoURL}
                       alt="Bonnie Green"
                     />
-                    Bonnie Green
+                    {comment.displayName}
                   </p>
                 </div>
                 <div>
@@ -131,9 +127,7 @@ const Comment = ({ blogId, bloggerEmail }) => {
                 </div>
               </footer>
               <p className="text-gray-500 dark:text-gray-400">
-                The article covers the essentials, challenges, myths and stages
-                the UX designer should consider while creating the design
-                strategy.
+                {comment.userComment}
               </p>
             </article>
           ))}
