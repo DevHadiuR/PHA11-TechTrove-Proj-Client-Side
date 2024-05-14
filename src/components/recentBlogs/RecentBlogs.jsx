@@ -99,9 +99,11 @@ const RecentBlogs = () => {
                   </svg>
                 </a>
                 <div className="flex items-center gap-5 pt-2">
-                  <Button outline gradientDuoTone="purpleToBlue">
-                    Details
-                  </Button>
+                  <Link to={`/blogDetails/${blog._id}`}>
+                    <Button outline gradientDuoTone="purpleToBlue">
+                      Details
+                    </Button>
+                  </Link>
                   <Button gradientDuoTone="purpleToBlue">Wish List</Button>
                 </div>
               </div>
