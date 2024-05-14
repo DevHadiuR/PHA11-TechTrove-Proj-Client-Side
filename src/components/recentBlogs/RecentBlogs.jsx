@@ -33,7 +33,7 @@ const RecentBlogs = () => {
       </p>
 
       <div className="mt-14 ">
-        {blogs.map((blog) => (
+        {blogs.slice(0, 6).map((blog) => (
           <div key={blog._id} className="mt-8">
             <div className="container grid grid-cols-12 mx-auto bg-[#F1F3F4] rounded-xl">
               <div
