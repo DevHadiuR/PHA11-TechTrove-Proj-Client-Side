@@ -4,6 +4,8 @@ import useAuth from "../../hooks/useAuth";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import "sweetalert2/src/sweetalert2.scss";
 
 const Comment = ({ blogId, bloggerEmail }) => {
   const axiosSecure = useAxiosSecure();
@@ -55,6 +57,36 @@ const Comment = ({ blogId, bloggerEmail }) => {
     return data;
   };
 
+  //   comment deleting part with tanstack query
+
+  const handleCommentDelete = (id) => {
+    console.log(id);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/allComments/${id}`).then((data) => {
+          const value = data.data;
+          if (value.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your Comment has been deleted.",
+              icon: "success",
+            });
+          }
+          console.log(value);
+        });
+      }
+    });
+  };
+
   return (
     <div className="mt-40 container mx-auto">
       {/* comment section */}
@@ -62,7 +94,7 @@ const Comment = ({ blogId, bloggerEmail }) => {
         <div className=" px-4">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
-              Comments (20)
+              Comments ({comments.length})
             </h2>
           </div>
 
@@ -121,12 +153,12 @@ const Comment = ({ blogId, bloggerEmail }) => {
                   </p>
                 </div>
                 <div>
-                  <button>
+                  <button onClick={() => handleCommentDelete(comment._id)}>
                     <RiDeleteBin6Line className="text-xl" />
                   </button>
                 </div>
               </footer>
-              <p className="text-gray-500 dark:text-gray-400">
+              <p className="text-gray-500 dark:text-gray-400 break-all">
                 {comment.userComment}
               </p>
             </article>
