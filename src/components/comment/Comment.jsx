@@ -1,7 +1,7 @@
 import { Button } from "flowbite-react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import useAuth from "../../hooks/useAuth";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
@@ -44,6 +44,19 @@ const Comment = ({ blogId, bloggerEmail }) => {
     };
     mutate(postData);
     e.target.reset();
+  };
+
+  //   use tanstack for get comment data
+
+  const { data: comments = [] } = useQuery({
+    queryFn: () => getComments(),
+    queryKey: ["commentsByID"],
+  });
+
+  const getComments = async () => {
+    const { data } = await axiosSecure(`/allComments/${blogId}
+    `);
+    return data;
   };
 
   return (
@@ -94,31 +107,36 @@ const Comment = ({ blogId, bloggerEmail }) => {
             )}
           </form>
 
-          <article className="p-6 mb-3 text-base bg-white border-t border-gray-300 dark:border-gray-700 dark:bg-gray-900">
-            <footer className="flex justify-between items-center mb-2">
-              <div className="flex items-center">
-                <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
-                  <img
-                    referrerPolicy="no-referrer"
-                    className="mr-2 w-10 h-10 rounded-full"
-                    src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-                    alt="Bonnie Green"
-                  />
-                  Bonnie Green
-                </p>
-              </div>
-              <div>
-                <button>
-                  <RiDeleteBin6Line className="text-xl" />
-                </button>
-              </div>
-            </footer>
-            <p className="text-gray-500 dark:text-gray-400">
-              The article covers the essentials, challenges, myths and stages
-              the UX designer should consider while creating the design
-              strategy.
-            </p>
-          </article>
+          {comments.map((comment) => (
+            <article
+              key={comment._id}
+              className="p-6 mb-3 text-base bg-white border-t border-gray-300 dark:border-gray-700 dark:bg-gray-900"
+            >
+              <footer className="flex justify-between items-center mb-2">
+                <div className="flex items-center">
+                  <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                    <img
+                      referrerPolicy="no-referrer"
+                      className="mr-2 w-10 h-10 rounded-full"
+                      src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                      alt="Bonnie Green"
+                    />
+                    Bonnie Green
+                  </p>
+                </div>
+                <div>
+                  <button>
+                    <RiDeleteBin6Line className="text-xl" />
+                  </button>
+                </div>
+              </footer>
+              <p className="text-gray-500 dark:text-gray-400">
+                The article covers the essentials, challenges, myths and stages
+                the UX designer should consider while creating the design
+                strategy.
+              </p>
+            </article>
+          ))}
         </div>
       </section>
     </div>
