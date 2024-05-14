@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import NavBar from "../../Shared/navbar/NavBar";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Comment from "../../components/comment/Comment";
 
 const BlogDetails = () => {
   const param = useParams();
@@ -69,6 +70,10 @@ const BlogDetails = () => {
       </div>
       <div className="mt-5 w-[97%] mx-auto ">
         <h1 className="text-xl font-medium">{longDescription}</h1>
+      </div>
+
+      <div>
+        <Comment></Comment>
       </div>
     </section>
   );
