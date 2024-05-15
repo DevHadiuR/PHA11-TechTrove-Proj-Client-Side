@@ -14,7 +14,7 @@ const AddBlog = () => {
   const {
     register,
     handleSubmit,
-    // reset,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -27,12 +27,14 @@ const AddBlog = () => {
         .then((value) => {
           const data = value.data;
           console.log(data);
+
           return data;
         })
         .catch((err) => console.log(err));
     },
     onSuccess: () => {
       toast.success("Successfully Added The Blog");
+      // reset();
     },
   });
 
@@ -49,7 +51,7 @@ const AddBlog = () => {
         className="hero min-h-screen"
         style={{
           backgroundImage:
-            "url(https://source.unsplash.com/random/1920x1080/?technology)",
+            "url(https://source.unsplash.com/random/1920x1080/?ai,laptop,coding,phone)",
         }}
       >
         <Helmet>
