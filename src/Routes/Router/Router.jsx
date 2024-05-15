@@ -6,6 +6,7 @@ import Login from "../../Pages/login/Login";
 import Error from "../../components/error/Error";
 import Register from "../../Pages/register/Register";
 import BlogDetails from "../../Pages/blogDetails/BlogDetails";
+import UpdateBlog from "../../Pages/update/UpdateBlog";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,12 @@ export const router = createBrowserRouter([
       {
         path: "/blogDetails/:id",
         element: <BlogDetails></BlogDetails>,
+      },
+      {
+        path: "/updateBlog/:id",
+        element: <UpdateBlog></UpdateBlog>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/allBlogs/${params.id}`),
       },
     ],
   },

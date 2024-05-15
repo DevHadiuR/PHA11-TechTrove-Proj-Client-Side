@@ -1,15 +1,23 @@
-import { Helmet } from "react-helmet-async";
-import NavBar from "../../Shared/navbar/NavBar";
 import { useForm } from "react-hook-form";
-import useAuth from "../../hooks/useAuth";
+import { useLoaderData } from "react-router-dom";
+import NavBar from "../../Shared/navbar/NavBar";
+import { Helmet } from "react-helmet-async";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
-const AddBlog = () => {
+const UpdateBlog = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
-  const { email } = user || {};
+  const loaderData = useLoaderData();
+  const {
+    bloggerEmail,
+    category,
+    img,
+    longDescription,
+    shortDescription,
+    title,
+  } = loaderData;
+
   // use hook for form
   const {
     register,
@@ -23,7 +31,7 @@ const AddBlog = () => {
   const { mutate } = useMutation({
     mutationFn: (data) => {
       axiosSecure
-        .post("/allBlogs", data)
+        .put("/allBlogs", data)
         .then((value) => {
           const data = value.data;
           console.log(data);
@@ -51,11 +59,11 @@ const AddBlog = () => {
         className="hero min-h-screen"
         style={{
           backgroundImage:
-            "url(https://source.unsplash.com/random/1920x1080/?ai,laptop,coding,phone)",
+            "url(https://source.unsplash.com/random/1920x1080/?phone,coding,laptop,ai)",
         }}
       >
         <Helmet>
-          <title>Add Blogs Page | TechTrove</title>
+          <title>Update Blog Page | TechTrove</title>
         </Helmet>
         <div className="hero-overlay bg-opacity-45"></div>
         <div className="hero-content mt-32">
@@ -63,21 +71,18 @@ const AddBlog = () => {
             <div className="hero-content flex flex-col  gap-6">
               <div className="text-center w-full flex-1 ">
                 <h1 className="text-4xl md:text-5xl font-bold text-white opacity-85  ">
-                  Your Gateway to Sharing Insights
+                  Blog Central - Update Your Post
                 </h1>
                 <p className="py-6 w-full md:w-[80%] mx-auto  text-lg md:text-xl text-white opacity-85">
-                  Welcome to the Blog Portal, your dedicated space for knowledge
-                  exchange and thought leadership. This is where your insights
-                  come alive and your expertise reaches a global audience. Dive
-                  into the art of storytelling and enrich our diverse tapestry
-                  of content by contributing your original blog posts. Whether
-                  you’re illuminating industry trends, offering life hacks, or
-                  sharing personal journeys, your voice is valuable here.
-                  Connect with like-minded readers and writers, and become a
-                  part of a community that values growth, learning, and the
-                  power of words. Embrace this opportunity to influence,
-                  inspire, and inform. Craft your narrative, hit publish, and
-                  watch as your ideas take flight across the digital landscape.
+                  Welcome to Blog Central, the hub for your creative
+                  expressions. This is your space to refine and enhance your
+                  blog posts. Whether you’re updating facts, polishing
+                  narratives, or adding fresh insights, we provide you with the
+                  tools to keep your content current and engaging. Dive in and
+                  let your words make an impact! Feel free to adjust the wording
+                  to better fit the tone and style of your website. If you need
+                  further customization or additional elements for your page,
+                  just let me know!
                 </p>
               </div>
               <div className="card flex-1 w-full ">
@@ -96,6 +101,7 @@ const AddBlog = () => {
                         <input
                           type="text"
                           name="title"
+                          defaultValue={title}
                           placeholder="Enter Your Title_Name"
                           className="input input-accent text-white text-lg  border-[#ffff] bg-transparent"
                           {...register("title", { required: true })}
@@ -116,6 +122,7 @@ const AddBlog = () => {
                         <input
                           type="url"
                           name="img"
+                          defaultValue={img}
                           placeholder="Enter Your Image URL"
                           className="input input-accent text-white text-lg  border-[#ffff] bg-transparent"
                           {...register("img", { required: true })}
@@ -137,6 +144,7 @@ const AddBlog = () => {
                           id="shortDescription"
                           rows="5"
                           type="text"
+                          defaultValue={shortDescription}
                           name="shortDescription"
                           placeholder="Enter Your Short Description"
                           className="input-accent text-white text-lg border p-3 rounded-2xl  border-[#ffff] bg-transparent my-5"
@@ -157,6 +165,7 @@ const AddBlog = () => {
                         <select
                           name="category"
                           id="category"
+                          defaultValue={category}
                           className="select select-accent text-white text-lg  border-[#ffff] bg-transparent"
                           {...register("category", { required: true })}
                         >
@@ -196,7 +205,7 @@ const AddBlog = () => {
                         <input
                           type="text"
                           name="bloggerEmail"
-                          defaultValue={email}
+                          defaultValue={bloggerEmail}
                           readOnly
                           placeholder="Enter Your Blogger Email"
                           className="input input-accent text-white text-lg  border-[#ffff] bg-transparent"
@@ -218,6 +227,7 @@ const AddBlog = () => {
                           id="longDescription"
                           rows="8"
                           type="text"
+                          defaultValue={longDescription}
                           name="longDescription"
                           placeholder="Enter Your Long_Description"
                           className="input-accent text-white text-lg border p-3 rounded-2xl  border-[#ffff] bg-transparent my-5"
@@ -236,7 +246,7 @@ const AddBlog = () => {
                         type="submit"
                         className="btn bg-transparent text-2xl hover:bg-[#512B58] text-white transition-all"
                       >
-                        ADD BLOG
+                        ADD ITEM
                       </button>
                     </div>
                   </form>
@@ -250,4 +260,4 @@ const AddBlog = () => {
   );
 };
 
-export default AddBlog;
+export default UpdateBlog;

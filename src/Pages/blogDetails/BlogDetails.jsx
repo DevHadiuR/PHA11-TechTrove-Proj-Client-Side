@@ -30,6 +30,7 @@ const BlogDetails = () => {
     longDescription,
     category,
     bloggerEmail,
+    _id,
   } = blog;
 
   return (
@@ -81,9 +82,10 @@ const BlogDetails = () => {
         <h1 className="text-xl font-medium">{longDescription}</h1>
       </div>
       <div className="flex justify-end mr-10 mt-20">
-        <Link>
-          <Button size="md" gradientMonochrome="purple" pill >
-          <MdOutlineBrowserUpdated  className="text-xl mr-1"/> <span className="text-md">Update Blog</span>
+        <Link to={`/updateBlog/${_id}`}>
+          <Button size="md" gradientMonochrome="purple" pill>
+            <MdOutlineBrowserUpdated className="text-xl mr-1" />{" "}
+            <span className="text-md">Update Blog</span>
           </Button>
         </Link>
       </div>
