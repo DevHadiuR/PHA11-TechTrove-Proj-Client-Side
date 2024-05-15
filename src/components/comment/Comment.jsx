@@ -13,7 +13,7 @@ const Comment = ({ blogId, bloggerEmail }) => {
   const { displayName, photoURL, email } = user || {};
 
   //   using tanstack for post data
-  const { mutate, refetch } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: (postData) => {
       return axiosSecure
         .post("/allComments", postData)
@@ -26,7 +26,8 @@ const Comment = ({ blogId, bloggerEmail }) => {
     },
     onSuccess: () => {
       toast.success("Successfully Commented");
-      QueryClient.invalidateQueries(["getCommentsByID"]);
+      // QueryClient.invalidateQueries(["getCommentsByID"]);
+      refetch();
     },
   });
 
@@ -49,7 +50,7 @@ const Comment = ({ blogId, bloggerEmail }) => {
 
   //   use tanstack for get comment data
 
-  const { data: comments = [] } = useQuery({
+  const { data: comments = [], refetch } = useQuery({
     queryFn: () => getComments(),
     queryKey: ["getCommentsByID"],
   });
@@ -82,6 +83,7 @@ const Comment = ({ blogId, bloggerEmail }) => {
           const value = data.data;
 
           if (value.deletedCount > 0) {
+            refetch();
             Swal.fire({
               title: "Deleted!",
               text: "Your Comment has been deleted.",
