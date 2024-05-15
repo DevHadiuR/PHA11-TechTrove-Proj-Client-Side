@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import NavBar from "../../Shared/navbar/NavBar";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Comment from "../../components/comment/Comment";
+import { Button } from "flowbite-react";
+import { MdOutlineBrowserUpdated } from "react-icons/md";
 
 const BlogDetails = () => {
   const param = useParams();
@@ -21,7 +23,14 @@ const BlogDetails = () => {
     return data;
   };
 
-  const { img, title, shortDescription, longDescription, category ,bloggerEmail} = blog;
+  const {
+    img,
+    title,
+    shortDescription,
+    longDescription,
+    category,
+    bloggerEmail,
+  } = blog;
 
   return (
     <section className="relative z-0">
@@ -71,7 +80,13 @@ const BlogDetails = () => {
       <div className="mt-5 w-[97%] mx-auto ">
         <h1 className="text-xl font-medium">{longDescription}</h1>
       </div>
-
+      <div className="flex justify-end mr-10 mt-20">
+        <Link>
+          <Button size="md" gradientMonochrome="purple" pill >
+          <MdOutlineBrowserUpdated  className="text-xl mr-1"/> <span className="text-md">Update Blog</span>
+          </Button>
+        </Link>
+      </div>
       <div>
         <Comment bloggerEmail={bloggerEmail} blogId={id}></Comment>
       </div>

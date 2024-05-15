@@ -163,7 +163,7 @@ const Comment = ({ blogId, bloggerEmail }) => {
                       handleCommentDelete(comment._id, comment.commenterEmail)
                     }
                   >
-                    <RiDeleteBin6Line className="text-xl" />
+                    <RiDeleteBin6Line className="text-2xl" />
                   </button>
                 </div>
               </footer>
