@@ -10,6 +10,7 @@ const UpdateBlog = () => {
   const axiosSecure = useAxiosSecure();
   const loaderData = useLoaderData();
   const {
+    _id,
     bloggerEmail,
     category,
     img,
@@ -31,7 +32,7 @@ const UpdateBlog = () => {
   const { mutate } = useMutation({
     mutationFn: (data) => {
       axiosSecure
-        .put("/allBlogs", data)
+        .put(`/allBlogs/${_id}`, data)
         .then((value) => {
           const data = value.data;
           console.log(data);
