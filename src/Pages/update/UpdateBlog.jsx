@@ -23,7 +23,7 @@ const UpdateBlog = () => {
   const {
     register,
     handleSubmit,
-    reset,
+    // reset,
     formState: { errors },
   } = useForm();
 
@@ -43,7 +43,7 @@ const UpdateBlog = () => {
     },
     onSuccess: () => {
       toast.success("Successfully Added The Blog");
-      reset();
+      window.location.reload(true);
     },
   });
 
@@ -66,7 +66,7 @@ const UpdateBlog = () => {
         <Helmet>
           <title>Update Blog Page | TechTrove</title>
         </Helmet>
-        <div className="hero-overlay bg-opacity-45"></div>
+        <div className="hero-overlay bg-opacity-50"></div>
         <div className="hero-content mt-32">
           <div className="hero min-h-screen ">
             <div className="hero-content flex flex-col  gap-6">
