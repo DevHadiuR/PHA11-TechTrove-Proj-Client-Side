@@ -1,7 +1,7 @@
 import { Button } from "flowbite-react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import useAuth from "../../hooks/useAuth";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
@@ -15,18 +15,18 @@ const Comment = ({ blogId, bloggerEmail }) => {
   //   using tanstack for post data
   const { mutate, refetch } = useMutation({
     mutationFn: (postData) => {
-      axiosSecure
+      return axiosSecure
         .post("/allComments", postData)
         .then((value) => {
           const data = value.data;
           console.log(data);
-          return data;
+          //   return data;
         })
         .catch((err) => console.log(err));
     },
     onSuccess: () => {
       toast.success("Successfully Commented");
-      refetch();
+      QueryClient.invalidateQueries(["getCommentsByID"]);
     },
   });
 
@@ -34,11 +34,14 @@ const Comment = ({ blogId, bloggerEmail }) => {
     e.preventDefault();
 
     const userComment = e.target.comment.value;
+    const commenterEmail = email;
+
     const postData = {
       userComment,
       displayName,
       photoURL,
       blogId,
+      commenterEmail,
     };
     mutate(postData);
     e.target.reset();
@@ -48,7 +51,7 @@ const Comment = ({ blogId, bloggerEmail }) => {
 
   const { data: comments = [] } = useQuery({
     queryFn: () => getComments(),
-    queryKey: ["commentsByID"],
+    queryKey: ["getCommentsByID"],
   });
 
   const getComments = async () => {
@@ -59,9 +62,12 @@ const Comment = ({ blogId, bloggerEmail }) => {
 
   //   comment deleting part with tanstack query
 
-  const handleCommentDelete = (id) => {
-    console.log(id);
-
+  const handleCommentDelete = (id, commenterEmail) => {
+    console.log(id, commenterEmail);
+    if (commenterEmail !== email) {
+      toast.error("Cannot Delete Others Comment!");
+      return;
+    }
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -74,6 +80,7 @@ const Comment = ({ blogId, bloggerEmail }) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/allComments/${id}`).then((data) => {
           const value = data.data;
+
           if (value.deletedCount > 0) {
             Swal.fire({
               title: "Deleted!",
@@ -106,16 +113,14 @@ const Comment = ({ blogId, bloggerEmail }) => {
 
           <form onSubmit={handleSubmit} className="mb-6">
             <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-300 dark:bg-gray-800 dark:border-gray-700">
-              {email === bloggerEmail && (
+              {email === bloggerEmail ? (
                 <input
                   type="text"
                   placeholder="Can not comment on own blog"
                   className="input input-bordered w-full max-w-sm text-xl "
                   disabled
                 />
-              )}
-
-              {email !== bloggerEmail && (
+              ) : (
                 <textarea
                   id="comment"
                   rows="6"
@@ -153,7 +158,11 @@ const Comment = ({ blogId, bloggerEmail }) => {
                   </p>
                 </div>
                 <div>
-                  <button onClick={() => handleCommentDelete(comment._id)}>
+                  <button
+                    onClick={() =>
+                      handleCommentDelete(comment._id, comment.commenterEmail)
+                    }
+                  >
                     <RiDeleteBin6Line className="text-xl" />
                   </button>
                 </div>
