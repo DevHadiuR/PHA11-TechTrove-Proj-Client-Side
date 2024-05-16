@@ -10,6 +10,7 @@ const AllBlogs = () => {
   const axiosSecure = useAxiosSecure();
   const [selectedCategory, setSelectedCategory] = useState("");
   const [search, setSearch] = useState("");
+  const [searchText, setSearchText] = useState("");
 
   // fetch blogs by category and search
   const { data: blogs = [] } = useQuery({
@@ -21,6 +22,7 @@ const AllBlogs = () => {
     const { data } = await axiosSecure(
       `/allBlogs?category=${selectedCategory}&search=${search}`
     );
+    setSearchText("");
 
     return data;
   };
@@ -31,8 +33,8 @@ const AllBlogs = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const value = e.target.searchTitle.value;
-    setSearch(value);
+    // const value = e.target.searchTitle.value;
+    setSearch(searchText);
   };
 
   return (
@@ -43,6 +45,8 @@ const AllBlogs = () => {
       {/* dropdown and search blog main div */}
       <div>
         <DropdownAndSearch
+          searchText={searchText}
+          setSearchText={setSearchText}
           handleSearch={handleSearch}
           handleDropDownCategory={handleDropDownCategory}
         ></DropdownAndSearch>

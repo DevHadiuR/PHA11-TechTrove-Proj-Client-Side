@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 
 const RecentBlogs = () => {
   const axiosSecure = useAxiosSecure();
-
+  const selectedCategory = "";
+  const search = "";
   //   get data with tanstack query
   const { data: blogs = [] } = useQuery({
     queryFn: () => getData(),
@@ -13,7 +14,9 @@ const RecentBlogs = () => {
   });
 
   const getData = async () => {
-    const { data } = await axiosSecure("/allBlogs");
+    const { data } = await axiosSecure(
+      `/allBlogs?category=${selectedCategory}&search=${search}`
+    );
     return data;
   };
 

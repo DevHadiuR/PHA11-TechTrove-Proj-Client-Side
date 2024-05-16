@@ -1,7 +1,7 @@
 ("use client");
 import { Dropdown } from "flowbite-react";
 
-const DropdownAndSearch = ({ handleDropDownCategory, handleSearch }) => {
+const DropdownAndSearch = ({ handleDropDownCategory, handleSearch ,setSearchText,searchText }) => {
   return (
     <div className="mt-24 flex flex-col-reverse md:flex-row justify-between items-start md:items-center w-[90%] mx-auto ">
       <div className="mt-3 md:mt-0  w-full md:w-auto flex md:block justify-end md:justify-start">
@@ -51,6 +51,8 @@ const DropdownAndSearch = ({ handleDropDownCategory, handleSearch }) => {
             <input
               name="searchTitle"
               type="text"
+              onChange={e=>setSearchText(e.target.value)}
+              value={searchText}
               className="border-none input input-bordered "
               placeholder="Search Blogs By Blog Title"
             />
