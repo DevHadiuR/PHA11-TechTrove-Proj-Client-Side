@@ -1,7 +1,7 @@
 ("use client");
 import { Dropdown } from "flowbite-react";
 
-const DropdownAndSearch = () => {
+const DropdownAndSearch = ({ handleDropDownCategory }) => {
   return (
     <div className="mt-24 flex flex-col-reverse md:flex-row justify-between items-start md:items-center w-[90%] mx-auto ">
       <div className="mt-3 md:mt-0  w-full md:w-auto flex md:block justify-end md:justify-start">
@@ -12,22 +12,34 @@ const DropdownAndSearch = () => {
           size="md"
           className="rounded-xl bg-[#512B58] p-2"
         >
-          <Dropdown.Item className="text-md text-white hover:text-black rounded-xl">
-            All
-          </Dropdown.Item>
-          <Dropdown.Item className="text-md text-white hover:text-black rounded-xl">
+          <Dropdown.Item
+            onClick={() => handleDropDownCategory("Latest Trends")}
+            className="text-md text-white hover:text-black rounded-xl"
+          >
             Latest Trends
           </Dropdown.Item>
-          <Dropdown.Item className="text-md text-white hover:text-black rounded-xl">
+          <Dropdown.Item
+            onClick={() => handleDropDownCategory("AI and Machine Learning")}
+            className="text-md text-white hover:text-black rounded-xl"
+          >
             AI and Machine Learning
           </Dropdown.Item>
-          <Dropdown.Item className="text-md text-white hover:text-black rounded-xl">
+          <Dropdown.Item
+            onClick={() => handleDropDownCategory("Cybersecurity")}
+            className="text-md text-white hover:text-black rounded-xl"
+          >
             Cybersecurity
           </Dropdown.Item>
-          <Dropdown.Item className="text-md text-white hover:text-black rounded-xl">
+          <Dropdown.Item
+            onClick={() => handleDropDownCategory("Gaming")}
+            className="text-md text-white hover:text-black rounded-xl"
+          >
             Gaming
           </Dropdown.Item>
-          <Dropdown.Item className="text-md text-white hover:text-black rounded-xl">
+          <Dropdown.Item
+            onClick={() => handleDropDownCategory("Software and Apps")}
+            className="text-md text-white hover:text-black rounded-xl"
+          >
             Software and Apps
           </Dropdown.Item>
         </Dropdown>

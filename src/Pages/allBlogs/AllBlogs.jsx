@@ -4,9 +4,11 @@ import AllOfTheBlogs from "../../components/allOfTheBlogs/AllOfTheBlogs";
 
 import DropdownAndSearch from "../../components/dropdown&search/DropdownAndSearch";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useState } from "react";
 
 const AllBlogs = () => {
   const axiosSecure = useAxiosSecure();
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   // fetch all the blogs
   const { data: blogs = [] } = useQuery({
@@ -18,6 +20,16 @@ const AllBlogs = () => {
     const { data } = await axiosSecure("/allBlogs");
     return data;
   };
+
+  const handleDropDownCategory = (entry) => {
+    console.log(entry);
+    setSelectedCategory(entry);
+  };
+
+  const filteredData = selectedCategory
+    ? blogs.filter((blog) => blog.category === selectedCategory)
+    : blogs;
+
   return (
     <section>
       <div className="relative z-0">
@@ -25,11 +37,13 @@ const AllBlogs = () => {
       </div>
       {/* dropdown and search blog main div */}
       <div>
-        <DropdownAndSearch></DropdownAndSearch>
+        <DropdownAndSearch
+          handleDropDownCategory={handleDropDownCategory}
+        ></DropdownAndSearch>
       </div>
       {/* all of the blogs */}
       <div className="mt-14 ">
-        {blogs.map((blog) => (
+        {filteredData.map((blog) => (
           <AllOfTheBlogs key={blog._id} blog={blog}></AllOfTheBlogs>
         ))}
       </div>
