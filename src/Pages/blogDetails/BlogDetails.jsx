@@ -5,8 +5,11 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Comment from "../../components/comment/Comment";
 import { Button } from "flowbite-react";
 import { MdOutlineBrowserUpdated } from "react-icons/md";
+import useAuth from "../../hooks/useAuth";
 
 const BlogDetails = () => {
+  const { user } = useAuth();
+  const { email } = user || {};
   const param = useParams();
   const id = param.id;
 
@@ -81,7 +84,11 @@ const BlogDetails = () => {
       <div className="mt-5 w-[97%] mx-auto ">
         <h1 className="text-xl font-medium">{longDescription}</h1>
       </div>
-      <div className="flex justify-end mr-10 mt-20">
+      <div
+        className={`flex justify-end mr-10 mt-20 ${
+          email !== bloggerEmail && "hidden"
+        } `}
+      >
         <Link to={`/updateBlog/${_id}`}>
           <Button size="md" gradientMonochrome="purple" pill>
             <MdOutlineBrowserUpdated className="text-xl mr-1" />{" "}
