@@ -1,7 +1,40 @@
 import { Button } from "flowbite-react";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const AllOfTheBlogs = ({ blog }) => {
+  const { user } = useAuth();
+  const { email } = user || {};
+  const axiosSecure = useAxiosSecure();
+
+  const { mutate } = useMutation({
+    mutationFn: (combinedData) => {
+      axiosSecure
+        .post("/allWishlist", combinedData)
+        .then((value) => {
+          const data = value.data;
+          console.log(data);
+
+          return data;
+        })
+        .catch((err) => console.log(err));
+    },
+    onSuccess: () => {
+      toast.success("Successfully Added to the Wishlist");
+    },
+  });
+
+  const handleWishlist = (WishlistBlog, wishlistAddedUserEmail) => {
+    const combinedData = {
+      ...WishlistBlog,
+      wishlistAddedUserEmail,
+    };
+    mutate(combinedData);
+  };
+
   return (
     <div key={blog._id} className="mt-8">
       <div className="container grid grid-cols-12 mx-auto bg-[#F1F3F4] rounded-xl">
@@ -72,9 +105,13 @@ const AllOfTheBlogs = ({ blog }) => {
                 Details
               </Button>
             </Link>
-            <Link to="/wishlist">
-              <Button gradientDuoTone="purpleToBlue">Wish List</Button>
-            </Link>
+
+            <Button
+              onClick={() => handleWishlist(blog, email)}
+              gradientDuoTone="purpleToBlue"
+            >
+              Wish List
+            </Button>
           </div>
         </div>
       </div>
