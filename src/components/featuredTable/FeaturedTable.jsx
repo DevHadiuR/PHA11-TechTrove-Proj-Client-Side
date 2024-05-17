@@ -88,16 +88,21 @@ const FeaturedTable = () => {
                   className="px-6 py-3 font-bold text-white text-lg md:text-xl"
                   key={header.id}
                 >
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
+                  {header.isPlaceholder ? null : (
+                    <div className="flex cursor-pointer hover:scale-105 transition-all">
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
 
-                  {
-                    { asc: <TiArrowSortedUp className="text-3xl" />, desc: <TiArrowSortedDown className="text-3xl" /> }[
-                      header.column.getIsSorted() ?? null
-                    ]
-                  }
+                      {
+                        {
+                          asc: <TiArrowSortedUp className="text-3xl" />,
+                          desc: <TiArrowSortedDown className="text-3xl" />,
+                        }[header.column.getIsSorted() ?? null]
+                      }
+                    </div>
+                  )}
                 </th>
               ))}
             </tr>
