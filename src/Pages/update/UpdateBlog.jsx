@@ -12,6 +12,7 @@ const UpdateBlog = () => {
   const {
     _id,
     bloggerEmail,
+    bloggerProfile,
     category,
     img,
     longDescription,
@@ -219,6 +220,27 @@ const UpdateBlog = () => {
                         )}
                       </div>
                       <div className="form-control col-span-1 md:col-span-2">
+                        <label className="label">
+                          <span className="label-text text-white text-xl font-semibold">
+                            Blogger_Profile
+                          </span>
+                        </label>
+                        <input
+                          type="url"
+                          name="bloggerProfile"
+                          defaultValue={bloggerProfile}
+                          placeholder="Enter Your Blogger Email"
+                          className="input input-accent text-white text-lg  border-[#ffff] bg-transparent"
+                          {...register("bloggerProfile", { required: true })}
+                        />
+                        {errors.bloggerProfile && (
+                          <span className="mt-2 text-yellow-300">
+                            This field is required
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="form-control col-span-1 md:col-span-2">
                         <label id="longDescription" className="label">
                           <span className="label-text text-white text-xl font-semibold">
                             Long_Description
@@ -247,7 +269,7 @@ const UpdateBlog = () => {
                         type="submit"
                         className="btn bg-transparent text-2xl hover:bg-[#512B58] text-white transition-all"
                       >
-                        ADD ITEM
+                        UPDATE BLOG
                       </button>
                     </div>
                   </form>

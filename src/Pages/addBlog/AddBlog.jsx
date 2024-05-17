@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 const AddBlog = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const { email } = user || {};
+  const { email, photoURL } = user || {};
   // use hook for form
   const {
     register,
@@ -203,6 +203,27 @@ const AddBlog = () => {
                           {...register("bloggerEmail", { required: true })}
                         />
                         {errors.bloggerEmail && (
+                          <span className="mt-2 text-yellow-300">
+                            This field is required
+                          </span>
+                        )}
+                      </div>
+                      <div className="form-control col-span-1 md:col-span-2">
+                        <label className="label">
+                          <span className="label-text text-white text-xl font-semibold">
+                            Blogger_Profile
+                          </span>
+                        </label>
+                        <input
+                          type="url"
+                          name="bloggerProfile"
+                          defaultValue={photoURL}
+                          readOnly
+                          placeholder="Enter Your Blogger Email"
+                          className="input input-accent text-white text-lg  border-[#ffff] bg-transparent"
+                          {...register("bloggerProfile", { required: true })}
+                        />
+                        {errors.bloggerProfile && (
                           <span className="mt-2 text-yellow-300">
                             This field is required
                           </span>
