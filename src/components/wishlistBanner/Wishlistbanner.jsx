@@ -10,21 +10,23 @@ const Wishlistbanner = () => {
       <div
         className="hero min-h-[520px]"
         style={{
-          backgroundImage: `url(/allBLogBanner.jpg)`,
+          backgroundImage: `url(/w2.jpg)`,
         }}
       >
         <div className="hero-overlay bg-opacity-40"></div>
         <div className="hero-content text-center text-neutral-content mt-28">
           <div className="max-w-4xl">
-            <h1 className="mb-5 text-3xl max-w-2xl mx-auto  md:text-5xl font-bold text-white opacity-85">
-              Explore Our All the News & Updates of Gaming
+            <h1 className="mb-5 text-3xl max-w-xl mx-auto  md:text-5xl font-bold text-white opacity-85">
+              My Wishlist of Inspiring Blogs
             </h1>
             <p className="mb-5 text-xl md:text-2xl font-medium opacity-90">
-              Welcome to the universe of tech in here, your portal to the latest
-              in AI, gaming, and more. Discover articles that push technological
-              boundaries, written by leading voices in the industry. Whether
-              you&apos;re seeking a deep dive or a brief update, find your next
-              digital inspiration here.
+              Welcome to your Wishlist page! Here, you can easily access all the
+              blogs you&apos;ve saved for later. Browse through your collection
+              of favorite articles and never miss out on the content that
+              matters most to you. Whether you&apos;re revisiting a
+              thought-provoking post or catching up on your reading, your
+              personalized wishlist is just a click away. Enjoy your curated
+              list of must-read blogs!
             </p>
           </div>
         </div>
