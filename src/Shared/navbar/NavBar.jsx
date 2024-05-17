@@ -127,7 +127,7 @@ const NavBar = () => {
             All Blogs
           </NavLink>
           <NavLink
-            to="/featuredBlogs"
+            to="/featured"
             className=" transition-all border-animate p-2 hover:bg-transparent "
             style={({ isActive }) => {
               return {

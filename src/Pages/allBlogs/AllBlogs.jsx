@@ -5,6 +5,7 @@ import AllOfTheBlogs from "../../components/allOfTheBlogs/AllOfTheBlogs";
 import DropdownAndSearch from "../../components/dropdown&search/DropdownAndSearch";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const AllBlogs = () => {
   const axiosSecure = useAxiosSecure();
@@ -39,6 +40,9 @@ const AllBlogs = () => {
 
   return (
     <section>
+      <Helmet>
+        <title>All Blogs Page | TechTrove</title>
+      </Helmet>
       <div className="relative z-0">
         <AllBLogBanner></AllBLogBanner>
       </div>
