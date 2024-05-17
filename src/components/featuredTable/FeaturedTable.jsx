@@ -89,7 +89,7 @@ const FeaturedTable = () => {
                   key={header.id}
                 >
                   {header.isPlaceholder ? null : (
-                    <div className="flex cursor-pointer hover:scale-105 transition-all">
+                    <div className="flex  justify-start md:justify-between items-center cursor-pointer border-animate pb-2">
                       {flexRender(
                         header.column.columnDef.header,
                         header.getContext()

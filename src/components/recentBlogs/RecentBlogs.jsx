@@ -1,9 +1,14 @@
 import { Button } from "flowbite-react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { TfiControlShuffle } from "react-icons/tfi";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const RecentBlogs = () => {
+  const { user } = useAuth();
+  const { email } = user || {};
   const axiosSecure = useAxiosSecure();
   const selectedCategory = "";
   const search = "";
@@ -18,6 +23,32 @@ const RecentBlogs = () => {
       `/allBlogs?category=${selectedCategory}&search=${search}`
     );
     return data;
+  };
+
+  // post request for add data to the wishlist
+  const { mutate } = useMutation({
+    mutationFn: (combinedData) => {
+      axiosSecure
+        .post("/allWishlist", combinedData)
+        .then((value) => {
+          const data = value.data;
+          console.log(data);
+
+          return data;
+        })
+        .catch((err) => console.log(err));
+    },
+    onSuccess: () => {
+      toast.success("Successfully Added to the Wishlist");
+    },
+  });
+
+  const handleWishlist = (WishlistBlog, wishlistAddedUserEmail) => {
+    const combinedData = {
+      ...WishlistBlog,
+      wishlistAddedUserEmail,
+    };
+    mutate(combinedData);
   };
 
   return (
@@ -107,9 +138,16 @@ const RecentBlogs = () => {
                       Details
                     </Button>
                   </Link>
-                  <Button gradientDuoTone="purpleToBlue">Wish List</Button>
+
+                  <Button
+                    onClick={() => handleWishlist(blog, email)}
+                    gradientDuoTone="purpleToBlue"
+                  >
+                    Wish List
+                  </Button>
                 </div>
               </div>
+              z
             </div>
           </div>
         ))}

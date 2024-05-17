@@ -72,7 +72,9 @@ const AllOfTheBlogs = ({ blog }) => {
                 Details
               </Button>
             </Link>
-            <Button gradientDuoTone="purpleToBlue">Wish List</Button>
+            <Link to="/wishlist">
+              <Button gradientDuoTone="purpleToBlue">Wish List</Button>
+            </Link>
           </div>
         </div>
       </div>
