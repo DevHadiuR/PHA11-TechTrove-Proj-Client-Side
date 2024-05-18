@@ -5,6 +5,9 @@ import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { Button } from "flowbite-react";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import "sweetalert2/src/sweetalert2.scss";
 
 const Wishlist = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,11 +25,48 @@ const Wishlist = () => {
     return [];
   };
 
-  const { data: blogs = [] } = useQuery({
+  const { data: blogs = [], refetch } = useQuery({
     queryFn: () => getWishlist(email),
     queryKey: ["allWishlist", email],
     enabled: !!email,
   });
+
+  //   remove blog part with tanstack query
+
+  const handleRemoveWishlist = (removingId, wishlistAddedUserEmail) => {
+    if (wishlistAddedUserEmail !== email) {
+      toast.error("Cannot Delete Others wish!");
+      return;
+    }
+    console.log(removingId, wishlistAddedUserEmail);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/allWishlist?removingId=${removingId}`)
+          .then((data) => {
+            const value = data.data;
+
+            if (value.deletedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your Comment has been deleted.",
+                icon: "success",
+              });
+            }
+            console.log(value);
+          });
+      }
+    });
+  };
 
   return (
     <section>
@@ -111,10 +151,15 @@ const Wishlist = () => {
                   </Link>
 
                   <Button
-                    // onClick={() => handleWishlist(blog, email)}
+                    onClick={() =>
+                      handleRemoveWishlist(
+                        blog._id,
+                        blog.wishlistAddedUserEmail
+                      )
+                    }
                     gradientDuoTone="purpleToPink"
                   >
-                    Remove WishList
+                    Remove Wish
                   </Button>
                 </div>
               </div>
