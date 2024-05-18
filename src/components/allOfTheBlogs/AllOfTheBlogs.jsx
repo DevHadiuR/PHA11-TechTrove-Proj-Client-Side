@@ -1,11 +1,12 @@
 import { Button } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 const AllOfTheBlogs = ({ blog }) => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const { email } = user || {};
   const axiosSecure = useAxiosSecure();
@@ -28,6 +29,10 @@ const AllOfTheBlogs = ({ blog }) => {
   });
 
   const handleWishlist = (WishlistBlog, wishlistAddedUserEmail) => {
+    if (!user) {
+      return navigate("/login");
+    }
+
     const {
       title,
       img,

@@ -4,7 +4,7 @@ import { FaGithub, FaTwitter } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "sweetalert2/src/sweetalert2.scss";
 
@@ -15,8 +15,8 @@ import NavBar from "../../Shared/navbar/NavBar";
 import bg3 from "../../assets/authenticationBG/log3.jpg";
 
 const Login = () => {
-  //   const location = useLocation();
-  //   const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const { loginUser, googleProvider, gitHubProvider, twitterProvider } =
     useAuth();
@@ -43,7 +43,7 @@ const Login = () => {
           icon: "success",
         });
 
-        // navigate(location?.state ? location.state : "/");
+        navigate(location?.state ? location.state : "/");
 
         // reset();
       })
@@ -64,7 +64,7 @@ const Login = () => {
           text: "You Have Successfully Loged In!",
           icon: "success",
         });
-        // navigate(location?.state ? location.state : "/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch(() => {
         Swal.fire({
@@ -82,7 +82,7 @@ const Login = () => {
           text: "You Have Successfully Loged In!",
           icon: "success",
         });
-        // navigate(location?.state ? location.state : "/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch(() => {
         Swal.fire({
@@ -100,7 +100,7 @@ const Login = () => {
           text: "You Have Successfully Loged In!",
           icon: "success",
         });
-        // navigate(location?.state ? location.state : "/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch(() => {
         Swal.fire({
@@ -134,8 +134,8 @@ const Login = () => {
                   Welcome Back!
                 </h1>
                 <p className="py-6 font-serif text-lg text-white opacity-90">
-                &quot;Sign in to access your account and explore our latest tech
-                  blogs. Stay updated with cutting-edge trends, insightful
+                  &quot;Sign in to access your account and explore our latest
+                  tech blogs. Stay updated with cutting-edge trends, insightful
                   articles, and expert opinions from our community of tech
                   enthusiasts.&quot;
                 </p>
