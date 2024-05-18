@@ -44,8 +44,22 @@ const RecentBlogs = () => {
   });
 
   const handleWishlist = (WishlistBlog, wishlistAddedUserEmail) => {
+    const {
+      title,
+      img,
+      shortDescription,
+      category,
+      longDescription,
+      bloggerEmail,
+    } = WishlistBlog;
+
     const combinedData = {
-      ...WishlistBlog,
+      title,
+      img,
+      shortDescription,
+      category,
+      longDescription,
+      bloggerEmail,
       wishlistAddedUserEmail,
     };
     mutate(combinedData);

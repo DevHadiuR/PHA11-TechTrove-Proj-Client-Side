@@ -60,14 +60,6 @@ const ReactProvider = ({ children }) => {
     return signInWithPopup(auth, twitProvider);
   };
 
-  //   const [craftItems, setCraftItems] = useState([]);
-
-  //   useEffect(() => {
-  //     fetch("https://sculpture-web-proj-server-site.vercel.app/addedSculptures")
-  //       .then((res) => res.json())
-  //       .then((data) => setCraftItems(data));
-  //   }, []);
-
   const projectInfo = {
     createUser,
     loginUser,
@@ -78,7 +70,6 @@ const ReactProvider = ({ children }) => {
     twitterProvider,
     loader,
     setUser,
-    // craftItems,
   };
 
   return (
