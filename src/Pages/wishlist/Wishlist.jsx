@@ -104,7 +104,7 @@ const Wishlist = () => {
                   </svg>
                 </a>
                 <div className="flex items-center gap-5 pt-2">
-                  <Link to={`/blogDetails/${blog._id}`}>
+                  <Link to={`/wishlistBlogDetails/${blog._id}`}>
                     <Button outline gradientDuoTone="purpleToBlue">
                       Details
                     </Button>
@@ -112,9 +112,9 @@ const Wishlist = () => {
 
                   <Button
                     // onClick={() => handleWishlist(blog, email)}
-                    gradientDuoTone="purpleToBlue"
+                    gradientDuoTone="purpleToPink"
                   >
-                    Wish List
+                    Remove WishList
                   </Button>
                 </div>
               </div>
