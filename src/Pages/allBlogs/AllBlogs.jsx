@@ -3,12 +3,13 @@ import AllBLogBanner from "../../components/allBLogBanner/AllBLogBanner";
 import AllOfTheBlogs from "../../components/allOfTheBlogs/AllOfTheBlogs";
 
 import DropdownAndSearch from "../../components/dropdown&search/DropdownAndSearch";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+// import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import axios from "axios";
 
 const AllBlogs = () => {
-  const axiosSecure = useAxiosSecure();
+  // const axiosSecure = useAxiosSecure();
   const [selectedCategory, setSelectedCategory] = useState("");
   const [search, setSearch] = useState("");
   const [searchText, setSearchText] = useState("");
@@ -20,8 +21,10 @@ const AllBlogs = () => {
   });
 
   const getData = async () => {
-    const { data } = await axiosSecure(
-      `/allBlogs?category=${selectedCategory}&search=${search}`
+    const { data } = await axios(
+      `${
+        import.meta.env.VITE_API
+      }/allBlogs?category=${selectedCategory}&search=${search}`
     );
     setSearchText("");
 

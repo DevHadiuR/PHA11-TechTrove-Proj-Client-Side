@@ -13,10 +13,12 @@ import useAuth from "../../hooks/useAuth";
 import NavBar from "../../Shared/navbar/NavBar";
 
 import bg3 from "../../assets/authenticationBG/log3.jpg";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   const { loginUser, googleProvider, gitHubProvider, twitterProvider } =
     useAuth();
@@ -36,12 +38,21 @@ const Login = () => {
   const onSubmit = (data) => {
     const { email, password } = data;
     loginUser(email, password)
-      .then(() => {
+      .then((result) => {
+        const user = result.user;
+
         Swal.fire({
           title: "Hurray !!!",
           text: "You Have Successfully Loged In!",
           icon: "success",
         });
+
+        axiosSecure
+          .post(`/jwt`, {
+            email: user?.email,
+          })
+          .then((value) => console.log(value.data))
+          .catch((err) => console.log(err));
 
         navigate(location?.state ? location.state : "/");
 
@@ -58,12 +69,21 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     googleProvider()
-      .then(() => {
+      .then((result) => {
+        const user = result.user;
+
         Swal.fire({
           title: "Hurray !!!",
           text: "You Have Successfully Loged In!",
           icon: "success",
         });
+
+        axiosSecure
+          .post(`/jwt`, {
+            email: user?.email,
+          })
+          .then((value) => console.log(value.data))
+          .catch((err) => console.log(err));
         navigate(location?.state ? location.state : "/");
       })
       .catch(() => {
@@ -76,12 +96,21 @@ const Login = () => {
   };
   const handleGithubLogin = () => {
     gitHubProvider()
-      .then(() => {
+      .then((result) => {
+        const user = result.user;
+
         Swal.fire({
           title: "Hurray !!!",
           text: "You Have Successfully Loged In!",
           icon: "success",
         });
+
+        axiosSecure
+          .post(`/jwt`, {
+            email: user?.email,
+          })
+          .then((value) => console.log(value.data))
+          .catch((err) => console.log(err));
         navigate(location?.state ? location.state : "/");
       })
       .catch(() => {
@@ -94,12 +123,21 @@ const Login = () => {
   };
   const handleTwitterLogin = () => {
     twitterProvider()
-      .then(() => {
+      .then((result) => {
+        const user = result.user;
+
         Swal.fire({
           title: "Hurray !!!",
           text: "You Have Successfully Loged In!",
           icon: "success",
         });
+
+        axiosSecure
+          .post(`/jwt`, {
+            email: user?.email,
+          })
+          .then((value) => console.log(value.data))
+          .catch((err) => console.log(err));
         navigate(location?.state ? location.state : "/");
       })
       .catch(() => {

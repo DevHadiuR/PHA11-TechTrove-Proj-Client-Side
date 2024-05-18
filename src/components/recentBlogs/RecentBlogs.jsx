@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { TfiControlShuffle } from "react-icons/tfi";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const RecentBlogs = () => {
   const navigate = useNavigate();
@@ -20,8 +21,10 @@ const RecentBlogs = () => {
   });
 
   const getData = async () => {
-    const { data } = await axiosSecure(
-      `/allBlogs?category=${selectedCategory}&search=${search}`
+    const { data } = await axios(
+      `${
+        import.meta.env.VITE_API
+      }/allBlogs?category=${selectedCategory}&search=${search}`
     );
     return data;
   };

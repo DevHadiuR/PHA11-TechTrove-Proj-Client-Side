@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 // import auth from "../../firebase/firebase.config";
 import auth from "../firebase/Firebase.config";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const googProvider = new GoogleAuthProvider();
 const gitProvider = new GithubAuthProvider();
@@ -22,6 +23,7 @@ export const ProjectContext = createContext(null);
 const ReactProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);
+  const axiosSecure = useAxiosSecure();
 
   const createUser = (email, password) => {
     setLoader(true);
@@ -44,8 +46,11 @@ const ReactProvider = ({ children }) => {
     };
   }, []);
 
-  const logoutUser = () => {
+  const logoutUser = async () => {
     setLoader(true);
+
+    const { data } = await axiosSecure(`/logout`);
+    console.log(data);
     signOut(auth);
   };
 
