@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -19,6 +19,7 @@ import bg2 from "../../assets/authenticationBG/log2.jpg";
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
   const { createUser, setUser } = useAuth();
+  const navigate = useNavigate();
 
   const handleError = (er) => {
     toast.error(er, {
@@ -87,6 +88,8 @@ const Register = () => {
           photoURL: url,
           displayName: name,
         });
+
+        navigate("/");
 
         reset();
       })

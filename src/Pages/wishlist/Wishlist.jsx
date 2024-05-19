@@ -163,7 +163,6 @@ const Wishlist = () => {
                   </Button>
                 </div>
               </div>
-              z
             </div>
           </div>
         ))}

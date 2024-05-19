@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import Header from "../../components/header/Header";
 import NewsLatter from "../../components/newslatter/NewsLatter";
 import RecentBlogs from "../../components/recentBlogs/RecentBlogs";
+import OurTeam from "../../components/ourTeam/OurTeam";
 
 const Home = () => {
   return (
@@ -12,6 +13,9 @@ const Home = () => {
       <Header></Header>
       <section>
         <RecentBlogs></RecentBlogs>
+      </section>
+      <section>
+        <OurTeam></OurTeam>
       </section>
       <section>
         <NewsLatter></NewsLatter>

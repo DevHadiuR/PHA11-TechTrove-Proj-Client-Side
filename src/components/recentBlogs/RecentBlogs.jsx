@@ -2,7 +2,7 @@ import { Button } from "flowbite-react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
-import { TfiControlShuffle } from "react-icons/tfi";
+// import { TfiControlShuffle } from "react-icons/tfi";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -169,7 +169,6 @@ const RecentBlogs = () => {
                   </Button>
                 </div>
               </div>
-              z
             </div>
           </div>
         ))}
