@@ -15,7 +15,7 @@ const RecentBlogs = () => {
   const selectedCategory = "";
   const search = "";
   //   get data with tanstack query
-  const { data: blogs = [] } = useQuery({
+  const { data: blogs = [], isLoading } = useQuery({
     queryFn: () => getData(),
     queryKey: ["allBlogs"],
   });
@@ -72,6 +72,10 @@ const RecentBlogs = () => {
     };
     mutate(combinedData);
   };
+
+  if (isLoading) {
+    return <p>loading....</p>;
+  }
 
   return (
     <div className="mt-20">
