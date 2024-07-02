@@ -39,5 +39,38 @@ Visit our live site at [TechTrove](https://assignment-11-techtrove-proj.web.app/
 - React-Sweetalert2
 - React-Toastify
 
+
+## Instruction for Cloning and Running the Project Locally
+
+To clone and run this project locally, follow these steps:
+
+1. **Clone the Repository:**
+   
+   git clone https://github.com/DevHadiuR/PHA11-TechTrove-Proj-Client-Side.git
+
+3. Navigate to the Project Directory:
+
+   cd YourRepositoryName
+
+5. Install Dependencies:
+
+   npm install
+
+7. Set Up Environment Variables:
+
+   Create a .env file in the root directory and configure any necessary environment variables.
+
+9. Start the Development Server:
+
+   npm run dev
+
+11. View the Application:
+
+Open your web browser and go to http://localhost:3000 to view the running application.
+
+
+That's it! You can now explore and modify the project locally on your machine.
+
+
 ## Contact
 For any inquiries or support, please contact us at [support@techtrove.com](mailto:support@techtrove.com)
